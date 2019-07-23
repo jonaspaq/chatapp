@@ -1,0 +1,52 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+.greenDot::after{
+    content:'';
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    padding: 1px;
+    background-color: rgb(46, 172, 109);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.redDot::after{
+    content:'';
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    padding: 1px;
+    background-color: rgb(165, 0, 0);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.messageThread{
+    height: 400px;
+    overflow-y: scroll;
+}
+.senderBox{
+    background-color: rgb(228, 228, 228, 0.5);
+    border-radius: 7px;
+    box-shadow: 0 0 3px gray;
+    max-width:70%;
+}
+.recieverBox{
+    color: white;
+    background-color: rgb(13, 126, 160);
+    border-radius: 7px;
+    box-shadow: 0 0 3px gray;
+    max-width:70%;
+    margin-left: auto;
+}
+.messageInput{
+    resize: none;
+    width:100%;
+}
