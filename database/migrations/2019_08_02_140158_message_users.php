@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Messages extends Migration
+class MessageUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class Messages extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('message_users', function(Blueprint $table){
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('message_users_id');
-            $table->string('message');
+            $table->string('sender_id');
+            $table->string('reciever_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class Messages extends Migration
      */
     public function down()
     {
-        //Schema::dropifExist('messages');
+        //
     }
 }

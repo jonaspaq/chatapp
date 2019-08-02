@@ -13,14 +13,14 @@ class UsersTable extends Migration
      */
     public function up()
     {
-        // Schema::create('users', function (Blueprint $table) {
-        //     $table->bigIncrements('id');
-        //     $table->string('name');
-        //     $table->string('username');
-        //     $table->string('password');
-        //     $table->boolean('status')->default(0);
-        //     $table->timestamps();
-        // });
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('username');
+            $table->string('password');
+            $table->boolean('status')->default(0);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -30,6 +30,6 @@ class UsersTable extends Migration
      */
     public function down()
     {
-        //
+        
     }
 }

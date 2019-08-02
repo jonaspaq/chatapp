@@ -8,8 +8,9 @@ class Messages extends Model
 {
     protected $table = 'messages';
     protected $primaryKey = 'id';
+    protected $foreignKey = 'message_user_id';
 
     protected $fillable = [
-        'sender_id','reciever_id','message'
+        'message_users_id','message'
     ];
 }

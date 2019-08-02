@@ -24,8 +24,10 @@ Route::group(['middleware' => 'guest'],function(){
 //Logged In User    
 Route::group(['middleware' => 'auth'],function(){
 
+    Route::get('/checkConvo/{recieverId}', 'Message_UsersController@check');
     Route::post('/sendMessage', 'MessagesController@store')->name('sendMessage');
-    Route::get('/loadMessage/{id}', 'MessagesController@load')->name('loadMessages');
+
+    Route::get('/loadMessage/{id}/{sender}', 'MessagesController@load');
 
 });
 

@@ -3,36 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Message_Users;
 use Auth;
 use App\Messages;
 
 class MessagesController extends Controller
 {
     public function store(Request $request){
-        
         $data = [
-            'sender_id' => Auth::user()->id,
-            'reciever_id' => $request->reciever_id,
+            'message_users_id' => $request->convo_id,
             'message' => $request->message
         ];
 
-        //return $data;
-        Messages::create($data);
+        $sendMessage = Messages::create($data);
 
-        return redirect()->back();
-
+        if($sendMessage){
+            return "Message Sent";
+        }else{
+            return "Error sending message.";
+        }
     }
 
-    public function load($sender=null){
-        $sender = 2;
-        $reciever = 1;
+    public function load($reciever, $sender){
+        $boxType = "";
 
-        $data = Messages::where('sender_id', $sender)
-        ->where('reciever_id', $reciever)
-        ->orWhere('sender_id', $reciever)
-        ->orWhere('reciever_id', $sender)
-        ->get();
+        $id1 = Message_Users::where('sender_id', $sender)->where('reciever_id',$reciever)->pluck('id');
+        $id2 = Message_Users::where('reciever_id', $sender)->where('sender_id',$reciever)->pluck('id');
+
+        $allMessages = Messages::where('message_users_id', $id1)->orWhere('message_users_id', $id2)->get();
         
-        return $data;
+        foreach($allMessages as $row){
+            if($id1[0]==$row['message_users_id']){$boxType = "p-2 recieverBox ml-auto";}else{$boxType = "float-left p-2 mb-2 senderBox";}
+            echo "<div class='p-2 d-flex'>";
+            echo "<div class='".$boxType."'>";
+            echo "<p>".$row['message']."</p>";
+            echo "</div>";
+            echo "</div>";
+        }
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Messages extends Migration
+class AddColumnMessageUsersIdToMessages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class Messages extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('message_users_id');
-            $table->string('message');
-            $table->timestamps();
+        Schema::table('messages', function (Blueprint $table) {
+            $table->foreign('message_users_id')->references('id')->on('message_users');
         });
     }
 
@@ -28,6 +25,8 @@ class Messages extends Migration
      */
     public function down()
     {
-        //Schema::dropifExist('messages');
+        Schema::table('messages', function (Blueprint $table) {
+            //
+        });
     }
 }

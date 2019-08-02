@@ -10,14 +10,16 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+
+        <!-- LIST OF ONLINE USERS -->
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Online Users</div>
+                <div class="card-header"> Online Users </div>
 
                 <div class="card-body">
                     <div class="list-group">
                         @foreach($users as $row)
-                        <a href="javascript:;" class="list-group-item list-group-action-item"> 
+                        <a href="javascript:;" onclick="openChatBox({{$row}},{{Auth::user()->id}});" class="list-group-item list-group-action-item"> 
                             <div class="d-flex" style="border:0px solid red">
                                 <span id="{{ $row->username }}"> {{ $row->name }} </span>
                                 <span class="ml-auto text-muted @if($row->status == 0) redDot @else greenDot @endif"> @if($row->status == 0) Offline @else Online @endif
@@ -32,31 +34,29 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8 d-none" id="default_card">
             <div class="card">
-                <div class="card-header">(Name of Selected User)</div>
+                <div class="card-header"> Choose a conversation</div>
+                <div class="card-body">
+                    <h1> This is shown when there is no chosen conversation.</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAT BOX OF THE SELECTED USER -->
+        <div class="col-md-8" id="active_card" style="display:non;">
+            <div class="card">
+                <div class="card-header" id="chatWithName">(Name of Selected User)</div>
 
                 <div class="card-body messageThread" id="messageThread">
 
-                    <div class="p-2 d-flex" style="border:0px solid red;">     
+                    <div class="p-2 d-flex">     
                         <div class="float-left p-2 mb-2 senderBox">
                             <p> Sender message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever</p>
                         </div>
                     </div>
 
-                    <div class="p-2 d-flex" style="border:0px solid blue;">
-                        <div class="p-2 recieverBox ml-auto">
-                            <p> This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever </p>
-                        </div>
-                    </div>
-
-                    <div class="p-2 d-flex" style="border:0px solid red;">     
-                        <div class="float-left p-2 mb-2 senderBox">
-                            <p> Sender message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever</p>
-                        </div>
-                    </div>
-
-                    <div class="p-2 d-flex" style="border:0px solid blue;">
+                    <div class="p-2 d-flex">
                         <div class="p-2 recieverBox ml-auto">
                             <p> This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever message!This is the reciever </p>
                         </div>
@@ -66,10 +66,10 @@
 
                 <div class="card-body p-0 m-0" style="border:0px solid black">
                     
-                    <form action="{{ route('sendMessage')}}" method="POST">
+                    <form method="POST" onsubmit="submitMessage();">
                         @csrf
-                        <input type="hidden" name="reciever_id" value="2">
-                        <textarea class="form-control m-0" name="message" id="messsageInput" rows="3" ></textarea>
+                        <input type="hidden" id="convo_id" name="convo_id" required>
+                        <textarea class="form-control m-0" name="message" id="messsageInput" rows="3" required></textarea>
                         <button type="submit" class="btn btn-primary position-absolute">Send</button>
                     </form>
                 </div>
