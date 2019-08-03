@@ -27,7 +27,9 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('/checkConvo/{recieverId}', 'Message_UsersController@check');
     Route::post('/sendMessage', 'MessagesController@store')->name('sendMessage');
 
-    Route::get('/loadMessage/{id}/{sender}', 'MessagesController@load');
+    Route::get('/loadMessage/{reciever}/{sender}', 'MessagesController@load');
+
+    Route::get('/retrieveMessages/{reciever}/{sender}/{lastMsgId}','MessagesController@retrieveNew');
 
 });
 
@@ -35,3 +37,5 @@ Route::group(['middleware' => 'auth'],function(){
 Route::get('/logout','UserController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
