@@ -67,7 +67,7 @@ function openChatBox(user, authUser){
             url: '/retrieveMessages/'+user.id+'/'+authUser+'/'+lastMessageId,
             success: function(response){
                 //console.log(response);
-                 console.log(lastMessageId);
+                //console.log(lastMessageId);
                 while(response[i]!=null){
                     $('#messageThread').append('<div class="p-2 d-flex"><div class="p-2 float-left senderBox"><p>'+response[i].message +'</p></div></div>');
                     lastMessageId = response[i].id + 1;

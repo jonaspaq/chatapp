@@ -30,7 +30,7 @@ p{
 }
 .messageThread{
     height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .senderBox{
     background-color: rgb(228, 228, 228, 0.5);
@@ -49,4 +49,9 @@ p{
 .messageInput{
     resize: none;
     width:100%;
+}
+#sendMsgBtn{
+    position: absolute;
+    bottom:0;
+    right:0;
 }

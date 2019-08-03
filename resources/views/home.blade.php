@@ -68,9 +68,11 @@
                     
                     <form method="POST" onsubmit="submitMessage();">
                         @csrf
+                        <div style="display:block;">
                         <input type="hidden" id="convo_id" name="convo_id" required>
                         <input class="form-control m-0" name="message" id="messsageInput" rows="3" required>
-                        <button type="submit" class="btn btn-primary position-absolute">Send</button>
+                        <button type="submit" class="btn btn-primary" id="sendMsgBtn">Send</button>
+                        </div>
                     </form>
                 </div>
 
