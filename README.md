@@ -39,3 +39,8 @@ php artisan serve
 ```
 
 Open http://localhost:8000 in your browser.
+
+## Tools Used 
+- [Laravel](https://laravel.com/)
+- [jQuery](https://jquery.com/)
+- [Bootstrap 4](https://getbootstrap.com/)
